@@ -9,7 +9,7 @@ const getReturnURL = () => {
 export default function WritingTest() {
   const [text, setText] = useState("");
   const [wordCount, setWordCount] = useState(0);
-  const requiredWords = ["친구", "놀란", "강아지들"];
+  const requiredWords = ["친구", "놀란", "강아지"];
   const [displayText, setDisplayText] = useState("");
   const predefinedText = "따스한 햇살이 골목길을 비추고, 나뭇잎 사이로 부는 바람이 잔잔한 소리를 냈다. 담벼락에는 고양이가 졸고 있었고, 창문 너머로 김이 서린 찻잔이 보였다. 조용한 거리에 어울리지 않게 어디선가 작은 발소리가 들려오고, 고개를 들어 소리가 난 곳을 찾아 두리번거리자 멀리서 낯선 그림자를 발견했다. "; // 미리 정해진 문장 삽입
   const [preTextIndex, setPreTextIndex] = useState(0);
@@ -223,10 +223,8 @@ export default function WritingTest() {
           : originalText;
 
         const words = finalText.trim().split(/\s+/);
+        setText(finalText); // 최종 텍스트 반영
         setWordCount(words.length);
-
-        // 💡 추가: handleChange 호출로 UI 강제 갱신
-        handleChange({ target: { value: finalText } });
 
         setIsPreTextTyping(false);
         setIsInputDisabled(false);   // 타이핑 끝난 후 입력창 활성화
@@ -334,7 +332,7 @@ export default function WritingTest() {
       {/* 사용자가 글 작성하는 영역 */}
       <div style={{ width: "80%", textAlign: "left", marginBottom: "10px", fontSize: "18px" }}> 
         <h1>📝 짧은 글 짓기</h1>
-        <p>아래 프롬프트에 글을 작성해주세요 (100-150 단어) 다음 제시어를 포함해야 합니다:</p>
+        <p>아래 프롬프트에 한글로 이야기를 작성해주세요 (100-150 단어) 다음 제시어를 포함해야 합니다:</p>
         <p style={{ color: "red", fontWeight: "bold", fontSize: "20px" }}>{requiredWords.join(", ")}</p>
         <p className="mt-2">단어 수: {wordCount}</p>
 
